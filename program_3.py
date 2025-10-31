@@ -9,11 +9,23 @@
 # It should handle any ValueError exceptions that are raised when the items that are read from the file 
 # are converted to a number.
 def sum_numbers_from_file():
-    ######################
-    # Add your code here #
-    ######################
-    print('In the sum_numbers_from_file function')
+        total = 0
+        with open('numbers.txt', 'r') as file:
+                lines = file.readlines()
+                if not lines:
+                    print("The file is empty.")
+                    return
+                
+        for line in lines:
+            try:
+                number = int(line.strip())
+                total += number
+            except ValueError:
+                print(f"ValueError: Could not convert line to an integer: '{line.strip()}'")
+            except IOError:
+                print("IOError: An error occurred while reading the file.")
+         
+        print(f"The total sum of the numbers in the file is: {total}")
 
-# You don't need to change anything below this line:
 if __name__ == '__main__':
     sum_numbers_from_file()
